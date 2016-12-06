@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
 	host: "localhost",
 	port: 3306,
 	user: "root",
-	password: "Mellon11",
+	password: "",
 	database: "bamazon"
 });
 connection.connect(function(err) {
@@ -71,9 +71,7 @@ inquirer.prompt([
 					if (user.quantity <= response[itemNumber].stock_qty){
 						//log the total cost
 						console.log("Your cost will be $" + (user.quantity*response[itemNumber].price).toFixed(2));
-						//subtract from database
-						//?????
-						//update
+							//subtract from database
 							var newQty = response[itemNumber].stock_qty-user.quantity
 							connection.query("UPDATE products SET ? WHERE ?", [{
 							  stock_qty: newQty
