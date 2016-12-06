@@ -3,58 +3,59 @@ var mysql = require("mysql");
 var Table = require('cli-table');
 var inquirer = require("inquirer");
 
-//connect
+// connect
 var connection = mysql.createConnection({
-host: "localhost",
-port: 3306,
-user: "root",
-password: "",
-database: "bamazon"
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "",
+  database: "bamazon"
 });
 connection.connect(function(err) {
-if (err) throw err;
-//console.log("connected as id " + connection.threadId);
+  if (err) throw err;
+  //console.log("connected as id " + connection.threadId);
 });
 
-//View Products for Sale
+// View Products for Sale
 function viewProducts() {
   //create table variable
   var table = new Table({
-  head: ['ID', 'Product Name', 'Department', 'Price', 'Qty.']
-  , colWidths: [5, 25, 15, 10, 10]
+    head: ['ID', 'Product Name', 'Department', 'Price', 'Qty.']
+    , colWidths: [5, 25, 15, 10, 10]
   });
-  //read from database
+  // read from database
   connection.query("SELECT * FROM products", function(err, response) {
-  if (err) throw err;
-  //push data to table
-  for(var i =0; i<response.length; i++){
-  table.push([response[i].item_id, response[i].product_name, response[i].department, response[i].price, response[i].stock_qty]);
-  }
-  //print table
-  console.log(table.toString());  
+    if (err) throw err;
+    // push data to table
+    for(var i =0; i<response.length; i++){
+      table.push([response[i].item_id, response[i].product_name, response[i].department, response[i].price, response[i].stock_qty]);
+    }
+    // print table
+    console.log(table.toString());  
+    // continue program with new choice
+    makeChoice();
   });
-  connection.end();
 }
 
 //View Low Inventory
 function lowInventory() {
   var table = new Table({
-  head: ['ID', 'Product Name', 'Department', 'Price', 'Qty.']
-  , colWidths: [5, 25, 15, 10, 10]
+    head: ['ID', 'Product Name', 'Department', 'Price', 'Qty.']
+    , colWidths: [5, 25, 15, 10, 10]
   });
   //read from database
   connection.query("SELECT * FROM products", function(err, response) {
-  if (err) throw err;
-  //push data to table
-  for(var i =0; i<response.length; i++){
-    if (response[i].stock_qty < 5){
-  table.push([response[i].item_id, response[i].product_name, response[i].department, response[i].price, response[i].stock_qty]);
-  }
-  //print table
-  }
-  console.log(table.toString());  
+    if (err) throw err;
+    //push data to table
+    for(var i =0; i<response.length; i++){
+      if (response[i].stock_qty < 5){
+        table.push([response[i].item_id, response[i].product_name, response[i].department, response[i].price, response[i].stock_qty]);
+      }
+    }
+    console.log(table.toString());  
+    //continue program with new choice
+    makeChoice();
   });
-  connection.end();
 }
 
 //Add to Inventory
@@ -76,28 +77,19 @@ function addInventory() {
         item_id: answers.item_id
       }], function(err, response) {
       if (err) throw err;
-      //console.log("**answers.stock_qty**"+answers.stock_qty)
-      //console.log("**response**")
-      //console.log(response)
-      //console.log("**response**")
-      //console.log("**response[0].stock_qty**"+response[0].stock_qty)
       var itemID = answers.item_id
       var newQty = parseInt(response[0].stock_qty) + parseInt(answers.stock_qty)
-      
         connection.query("UPDATE products SET ? WHERE ?", [{
         stock_qty: newQty
         }, {
         item_id: itemID
         }], function(err, rows, fields) {
           if (err) throw err;
-        console.log("**answers.item_id**"+answers.item_id)  
-        console.log("**newQty**"+newQty)
+          //continue program with new choice
+          makeChoice();
         });
-        connection.end();
       });
-  
   });
-
 }
 
 //Add New Product
@@ -126,19 +118,21 @@ function addProduct() {
   ]).then(function(answers) {
     connection.query("INSERT INTO products (product_name, department, price, stock_qty) VALUES (?, ?, ?, ?)", [answers.product_name,answers.department,answers.price,answers.stock_qty], function(err, rows, fields) {
       if (err) throw err;
+      //continue program with new choice
+    makeChoice();
       });
-  connection.end();
   });
 }
 
+//function selection
 function makeChoice() {
   // Create a prompt 
   inquirer.prompt([
   {
-  type: "list",
-  message: "What would you like to do?",
-  name: "choice",
-  choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "I'm Finished"]
+    type: "list",
+    message: "What would you like to do?",
+    name: "choice",
+    choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "I'm Finished"]
   },
   ]).then(function(user) {
     switch (user.choice) {
@@ -161,4 +155,5 @@ function makeChoice() {
   });
 }
 
+//call function to start program
 makeChoice()  
