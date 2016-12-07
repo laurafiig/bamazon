@@ -1,1 +1,1 @@
-<?php include_once("bamazonCustomer.js"); ?>
+<?php include_once("readme.md"); ?>
