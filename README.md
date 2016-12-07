@@ -31,8 +31,6 @@ If no further purchase is desired, the program exits.
 
 ## bamazonManager.js
 
-bamazonManager.js allows a user to , , , or 
-
 Initial load and options prompt:  (*returns to options prompt after each request is performed*)
 
 ![initial](/screenshots/manager1.png)
