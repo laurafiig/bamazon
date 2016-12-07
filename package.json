@@ -1,0 +1,24 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Node.js and SQL order and inventory app",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "node bamazonCustomer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurafiig/bamazon.git"
+  },
+  "author": "laurafiig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurafiig/bamazon/issues"
+  },
+  "homepage": "https://github.com/laurafiig/bamazon#readme",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "inquire": "^0.4.8",
+    "mysql": "^2.12.0"
+  }
+}

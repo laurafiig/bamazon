@@ -48,7 +48,7 @@ function purchase() {
 					inquirer.prompt([
 					{
 						type: "input",
-						message: "Please enter the item number you would like to buy",
+						message: "Please enter the item number you would like to purchase:",
 						name: "itemNumber"
 					},
 					//store the answer
@@ -62,7 +62,7 @@ function purchase() {
 						inquirer.prompt([
 						{
 							type: "input",
-							message: "How many item " + user.itemNumber + ": " + response[user.itemNumber-1].product_name + " do you want?",
+							message: "How many "+ response[user.itemNumber-1].product_name + " would you like to purchase?",
 							name: "quantity"
 						},
 						//store the answer
@@ -70,7 +70,11 @@ function purchase() {
 							//check for available quantity
 							if (user.quantity <= response[itemNumber].stock_qty){
 								//log the total cost
+								console.log("")
+								console.log("")								
 								console.log("Your cost will be $" + (user.quantity*response[itemNumber].price).toFixed(2));
+								console.log("")
+								console.log("")								
 									//subtract from database
 									var newQty = response[itemNumber].stock_qty-user.quantity
 									connection.query("UPDATE products SET ? WHERE ?", [{
