@@ -1,25 +1,21 @@
-# bamazon
+# BAMAZON
 
-BAMAZON
-
-order and inventory app  using Node.js and SQL
+Order and inventory app using Node.js and SQL
 
 bamazonCustomer.js allows a user to make a purchase from inventory.
 
 bamazonManager.js allows a user to see all inventory, check for low inventory, re-stock products, or add new products 
 
-https://fierce-taiga-38693.herokuapp.com/
+On heroku at: https://fierce-taiga-38693.herokuapp.com/
 
 
 ## bamazonCustomer.js
 
-initial load and purchase prompt
+Initial load and purchase prompt:
 
 ![initial](/screenshots/customer1.png)
 
-when purchase confirmed, item number and quantity entered
-total cost is calculated, and updated table is generated
-*after screencap I added some spacing around the total to improve the look*
+When purchase confirmed, item number and quantity entered, then total cost is calculated, updated table is generated, and user is promted for a new purchase.  (*after screencap I added some spacing around the total to improve the look*)
 
 ![initial](/screenshots/customer2.png)
 
@@ -31,6 +27,34 @@ When a too high quantity is entered, an insufficient stock message is generated 
 
 ![initial](/screenshots/customer4.png)
 
-if no further purchase desired, the program exits
+If no further purchase is desired, the program exits.
 
 ## bamazonManager.js
+
+bamazonManager.js allows a user to , , , or 
+
+Initial load and options prompt:  (*returns to options prompt after each request is performed*)
+
+![initial](/screenshots/manager1.png)
+
+When see all inventory is chosen:
+
+![initial](/screenshots/manager2.png)
+
+When check for low inventory is chosen:
+
+![initial](/screenshots/manager3.png)
+
+When re-stock products is chosen:
+
+![initial](/screenshots/manager4.png)
+
+When see add new products is chosen:
+
+![initial](/screenshots/manager5.png)
+
+See all inventory one more time to show changes:
+
+![initial](/screenshots/manager6.png)
+
+If no further purchase is desired, the program exits.
