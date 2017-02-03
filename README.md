@@ -6,8 +6,6 @@ bamazonCustomer.js allows a user to make a purchase from inventory.
 
 bamazonManager.js allows a user to see all inventory, check for low inventory, re-stock products, or add new products 
 
-On heroku at: https://fierce-taiga-38693.herokuapp.com/
-
 
 ## bamazonCustomer.js
 
